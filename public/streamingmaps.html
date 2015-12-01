@@ -237,7 +237,7 @@
   content: 'Venue: <b>'+venuename+'</b> ' 
 });
 google.maps.event.addListener(marker[i], 'click', function() {
-  marker.info.open(map, marker[i]);
+  marker[i].info.open(map, marker[i]);
 });
           markers.push(marker[i]);
 						//console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
