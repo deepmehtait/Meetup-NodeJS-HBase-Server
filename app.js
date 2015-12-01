@@ -63,6 +63,28 @@ app.get('/getStateevents', function (req, res) {
 });
 
 
+app.get('/getnegative/{eventname}', function (req, res) {
+	console.log("get state events");
+	var client = hbase({
+		host: 'localhost',
+		port: 28080
+	});
+	var conection = new hbase.Connection(client);
+	conection.get('https://localhost:28080/ec_ng/'+eventname+'*',function(error,data,response){
+		if(error){
+			console.log('error');
+			res.json('{"message":"error"}');
+		}
+		//console.log("data->"+util.inspect(data,false,null));
+		res.json(data);
+
+	})
+  //res.json('Hello World!');
+});
+
+
+
+
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;

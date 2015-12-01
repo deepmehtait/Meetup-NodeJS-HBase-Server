@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CS 286</title>
+
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+
+  
+
+  <!-- nanoScroller -->
+  <link rel="stylesheet" type="text/css" href="assets/nanoScroller/nanoscroller.css" />
+
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" type="text/css" href="assets/font-awesome/css/font-awesome.min.css" />
+
+  <!-- Material Design Icons -->
+  <link rel="stylesheet" type="text/css" href="assets/material-design-icons/css/material-design-icons.min.css" />
+
+  <!-- IonIcons -->
+  <link rel="stylesheet" type="text/css" href="assets/ionicons/css/ionicons.min.css" />
+
+  <!-- WeatherIcons -->
+  <link rel="stylesheet" type="text/css" href="assets/weatherIcons/css/weather-icons.min.css" />
+  <!-- Main -->
+  <link rel="stylesheet" type="text/css" href="assets/_con/css/_con.min.css" />
+      <link rel="stylesheet" type="text/css" href="assets/jquery-clockpicker/jquery-clockpicker.min.css">
+
+</head>
+
+<body class="yay-hide">
+  
+  <nav class="navbar-top navbar-dark">
+    <div class="nav-wrapper">
+
+      <!-- Sidebar toggle -->
+      <a href="#" class="yay-toggle">
+        <div class="burg1"></div>
+        <div class="burg2"></div>
+        <div class="burg3"></div>
+      </a>
+      <!-- Sidebar toggle -->
+
+      <!-- Logo -->
+      <a href="#!" class="brand-logo">
+        <h2 class="thin center" style="margin:0px;">Meetup Stream Analysis</h2>
+      </a>
+      <!-- /Logo -->
+
+      <!-- Menu -->
+      
+      <!-- /Menu -->
+
+    </div>
+  </nav>
+  <!-- /Top Navbar -->
+
+
+  
+  <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
+
+    <div class="top">
+      <div>
+        <!-- Sidebar toggle -->
+        <a href="#" class="yay-toggle">
+          <div class="burg1"></div>
+          <div class="burg2"></div>
+          <div class="burg3"></div>
+        </a>
+        <!-- Sidebar toggle -->
+
+        <!-- Logo -->
+        <a href="#!" class="brand-logo">
+          <img src="assets/_con/images/logo-white.png" alt="Con">
+        </a>
+        <!-- /Logo -->
+      </div>
+    </div>
+
+
+    <div class="nano">
+      <div class="nano-content">
+<ul>
+          
+          <li class="label">Menu</li>
+          <li>
+            <a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> Dashboards<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+            <ul>
+              <li>
+                <a href="" class="waves-effect waves-blue">Tab 1</a>
+              </li>
+             
+            </ul>
+          </li>
+
+          <li>
+            <a href="widgets.html" class="waves-effect waves-blue"><i class="fa fa-magic"></i>Tab 2</a>
+          </li>
+
+          <li>
+            <a href="layouts.html" class="waves-effect waves-blue"><i class="mdi mdi-av-web"></i> Tab 3</a>
+          </li>
+                   
+        </ul>
+        
+
+      </div>
+    </div>
+  </aside>
+  <!-- /Yay Sidebar -->
+
+
+  <!-- Main Content -->
+  <section class="content-wrap">
+
+
+    <!-- Breadcrumb -->
+    <div class="page-title">
+
+      <div class="row">
+        <div class="col s12 m9 l10">
+          <h1>Sentiment Analysis on Event Comments</h1>
+
+          
+        </div>
+         </div>
+
+    </div>
+    <!-- /Breadcrumb -->
+    <div class="row">
+    <!-- form -->
+    
+    
+    <div class="col s12 l12">
+    <div class="card-panel"> 
+    <form id="formname" onsubmit="return false;">
+    <div class="row" class="col l6">
+    <!-- Business Name -->
+            <div class="input-field col l6">
+              <input id="input-name" name="eventName" type="text" required>
+              <label for="input-name">Event Name</label>
+            </div>
+    
+    <button class="btn"   onClick="getRec();">
+      Submit <i class="mdi-content-send right"></i>
+    </button>
+    </div>
+    </form>
+    </div>
+    <div class="card-panel center-align">
+    <h4>Analysis</h4>
+ 
+          <div class="center-block" id="flotPieChart" style="height: 400px"></div>
+    </div>
+    
+    </div>
+    
+    </div>
+  </section>
+      
+  <!-- /Main Content -->
+
+  <!-- Search Bar -->
+  
+  <!-- /Search Bar -->
+
+
+
+ 
+  
+
+
+<style>
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: url(js/ajax-loader.gif)
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+
+</style>
+ 
+  
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="assets/jquery/jquery.min.js"></script>
+
+  <!-- jQuery RAF (improved animation performance) -->
+  <script type="text/javascript" src="assets/jqueryRAF/jquery.requestAnimationFrame.min.js"></script>
+
+  <!-- nanoScroller -->
+  <script type="text/javascript" src="assets/nanoScroller/jquery.nanoscroller.min.js"></script>
+
+  <!-- Materialize -->
+  <script type="text/javascript" src="assets/materialize/js/materialize.min.js"></script>
+
+  <!-- Sortable -->
+  <script type="text/javascript" src="assets/sortable/Sortable.min.js"></script>
+
+  <!-- Main -->
+  <script type="text/javascript" src="assets/_con/js/_con.min.js"></script>
+    <script type="text/javascript" src="assets/jquery-clockpicker/jquery-clockpicker.min.js"></script>
+     <!-- Flot -->
+  <script type="text/javascript" src="assets/flot/jquery.flot.min.js"></script>
+  <script type="text/javascript" src="assets/flot/jquery.flot.time.min.js"></script>
+  <script type="text/javascript" src="assets/flot/jquery.flot.pie.min.js"></script>
+  <script type="text/javascript" src="assets/flot/jquery.flot.tooltip.min.js"></script>
+  <script type="text/javascript" src="assets/flot/jquery.flot.categories.min.js"></script>
+    <script type="text/javascript" src="assets/d3/d3.min.js"></script>
+    <script type="text/javascript" src="js/charts.js"></script>
+      
+    <script type="text/javascript" src="js/base64.js"></script>
+
+    
+    
+    <script>
+	function  getRec(){
+		var eventname=$('#input-name').val();
+		alert(eventname);
+		
+		
+		}
+	(function() {
+      var chart = $("#flotPieChart");
+      /*var data = [
+          { label: "IE",  data: 19.5, color: "#90a4ae"},
+          { label: "Safari",  data: 4.5, color: "#7986cb"},
+          { label: "Firefox",  data: 36.6, color: "#9575cd"},
+          { label: "Opera",  data: 2.3, color: "#4db6ac"},
+          { label: "Chrome",  data: 36.3, color: "#64b5f6"}
+      ];*/
+      var data=[{"data":0,"color":"#90a4ae","label":1.0},{"data":4,"color":"#7986cb","label":2.0},{"data":8,"color":"#9575cd","label":4.0},{"data":0,"color":"#4db6ac","label":4.5},{"data":6,"color":"#64b5f6","label":2.5},{"data":1,"color":"#CC3399","label":5.0},{"data":0,"color":"#990099","label":1.5},{"data":9,"color":"#FF0066","label":3.0},{"data":8,"color":"#FFFF99","label":3.5}];
+      var options = {
+        series: {
+          pie: {
+            innerRadius: 0.5,
+            show: true
+          }
+        },
+        grid: {
+          hoverable: true
+        },
+        legend: {
+          backgroundOpacity: 0,
+          labelBoxBorderColor: "none"
+        },
+        tooltip: true,
+        tooltipOpts: {
+          content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+          shifts: {
+            x: 20,
+            y: 0
+          },
+          defaultTheme: false
+        }
+      };
+    
+      function initFlot() {
+        $.plot(chart, data, options);
+        chart.find('.legend table').css('width', 'auto')
+             .find('td').css('padding', 5);
+      }
+      initFlot();
+      $(window).on('resize', initFlot);
+    
+    }());
+	
+	
+    $body = $("body");
+
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+     ajaxStop: function() { $body.removeClass("loading"); }    
+});
+
+var options ={
+    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+    scaleBeginAtZero : true,
+
+    //Boolean - Whether grid lines are shown across the chart
+    scaleShowGridLines : true,
+
+    //String - Colour of the grid lines
+    scaleGridLineColor : "rgba(0,0,0,.05)",
+
+    //Number - Width of the grid lines
+    scaleGridLineWidth : 1,
+
+    //Boolean - Whether to show horizontal lines (except X axis)
+    scaleShowHorizontalLines: true,
+
+    //Boolean - Whether to show vertical lines (except Y axis)
+    scaleShowVerticalLines: true,
+
+    //Boolean - If there is a stroke on each bar
+    barShowStroke : true,
+
+    //Number - Pixel width of the bar stroke
+    barStrokeWidth : 2,
+
+    //Number - Spacing between each of the X value sets
+    barValueSpacing : 5,
+
+    //Number - Spacing between data sets within X values
+    barDatasetSpacing : 1,
+
+    //String - A legend template
+    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+};    
+    var ctx = document.getElementById("myChart").getContext("2d");
+    $(document).ready(function(e) {
+	  // init map
+    	//setTimeout(callajax,500);    
+    });
+	
+	function callajax() {
+		var lableData=[];
+		var dataSet=[];
+var dataGraph = {
+    labels: "",
+    datasets: [
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+      //      data: [28, 48, 40, 19, 86, 27, 90]
+        }
+    ]
+};
+//    var marker = {};
+    $.ajax({
+        type: "GET",
+        url: "http://52.34.81.201:3000/getStateevents",
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        dataType: 'json',
+        data: "",
+        async: false,
+        crossDomain: true,
+        success: function(data) {
+            // alert('success'+JSON.stringify(data));
+            // console.log(JSON.stringify(data));
+            var rowlen = data.Row.length;
+            console.log(rowlen);
+			$("#ongoing").text(rowlen);
+            if (rowlen > 0) {
+                for (var i = 0; i < rowlen; i++) {
+                    var trendcount = Base64.decode(data.Row[i].Cell[0].$);
+                    var eventnameState = Base64.decode(data.Row[i].Cell[1].$);
+					lableData.push(eventnameState);
+					dataSet.push(trendcount);
+
+                    
+                   
+                }
+            }
+			//console.log(JSON.stringify(dataGraph));
+//			console.log("will post");
+			dataGraph.labels=lableData;
+			//console.log(JSON.stringify(dataGraph));
+			dataGraph.datasets[0].data=dataSet;
+			//console.log(JSON.stringify(dataGraph));
+			var myBarChart = new Chart(ctx).Bar(dataGraph, options);
+
+            console.log("will post");
+           
+        },
+        error: function(response, text, err) {
+            alert(err);
+        }
+    });
+
+
+}  
+    
+    </script>
+    <div class="modal"><!-- Place at bottom of page --></div>
+</body>
+</html>
