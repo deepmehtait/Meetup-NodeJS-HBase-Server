@@ -196,52 +196,52 @@
     	setTimeout(callajax,2000);    
     });
 	
-	function callajax(){
-		
-	  var center = new google.maps.LatLng(38.7000, 9.1833);
-        var map = new google.maps.Map(document.getElementById('map2'), {
-          zoom: 3,
-          center: center,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-		//alert("wiill do ajax");
-		var markers = [];
-		var marker=[];
-	 $.ajax({
-     type: "GET",
-     url: "http://52.34.81.201:3000/getevents",
-	 headers: {          
-     "Accept" : "application/json; charset=utf-8",         
-    "Content-Type": "application/json; charset=utf-8"},
-     dataType: 'json',
-     data: "",
-     async: false,
-     crossDomain: true,
-     success: function(data) {
-        // alert('success'+JSON.stringify(data));
-		// console.log(JSON.stringify(data));
-		 var rowlen=data.Row.length;
-		 console.log(rowlen);
-		 if(rowlen>0){
-				for(var i=0;i<rowlen;i++){
-						var venuelat=Base64.decode(data.Row[i].Cell[1].$);
-						var venuelon=Base64.decode(data.Row[i].Cell[2].$);
-						var venuename=Base64.decode(data.Row[i].Cell[3].$);
-						var latLng = new google.maps.LatLng(venuelat,venuelon);
-						 marker[i] = new google.maps.Marker({
-            position: latLng,
-			clickable: true,
-		
-          });
-		  marker[i].info = new google.maps.InfoWindow({
-  content: 'Venue: <b>'+venuename+'</b> ' 
-});
-google.maps.event.addListener(marker[i], 'click', function() {
-  marker[i].info.open(map, marker[i]);
-});
-          markers.push(marker[i]);
-						//console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
-						 /*map.addMarker({
+	function callajax() {
+
+    var center = new google.maps.LatLng(38.7000, 9.1833);
+    var map = new google.maps.Map(document.getElementById('map2'), {
+        zoom: 3,
+        center: center,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    //alert("wiill do ajax");
+    var markers = [];
+    var marker = {};
+    $.ajax({
+        type: "GET",
+        url: "http://52.34.81.201:3000/getevents",
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        dataType: 'json',
+        data: "",
+        async: false,
+        crossDomain: true,
+        success: function(data) {
+            // alert('success'+JSON.stringify(data));
+            // console.log(JSON.stringify(data));
+            var rowlen = data.Row.length;
+            console.log(rowlen);
+            if (rowlen > 0) {
+                for (var i = 0; i < rowlen; i++) {
+                    var venuelat = Base64.decode(data.Row[i].Cell[1].$);
+                    var venuelon = Base64.decode(data.Row[i].Cell[2].$);
+                    var venuename = Base64.decode(data.Row[i].Cell[3].$);
+                    var latLng = new google.maps.LatLng(venuelat, venuelon);
+                    marker[i] = new google.maps.Marker({
+                        position: latLng,
+                        clickable: true,
+                    });
+                    marker[i].info = new google.maps.InfoWindow({
+                        content: 'Venue: <b>' + venuename + '</b> '
+                    });
+                    google.maps.event.addListener(marker[i], 'click', function() {
+                        marker[i].info.open(map, marker[i]);
+                    });
+                    markers.push(marker[i]);
+                    //console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
+                    /*map.addMarker({
         lat: venuelat,
         lng: venuelon,
         title: venuename,
@@ -249,22 +249,20 @@ google.maps.event.addListener(marker[i], 'click', function() {
           content: 'Venue Name: <b>'+venuename+'</b>'
         }
       });*/
-							
-					}	 
-			 }
-			 console.log("will post");
-			 var markerCluster = new MarkerClusterer(map, markers);
-		 
-     },
-     error: function(response, text, err) {
-         alert(err);
-     }
- });	
- 
-		
-		}
-    
-   
+
+                }
+            }
+            console.log("will post");
+            var markerCluster = new MarkerClusterer(map, markers);
+
+        },
+        error: function(response, text, err) {
+            alert(err);
+        }
+    });
+
+
+}  
     
     </script>
 </body>
