@@ -322,9 +322,11 @@ var dataGraph = {
                    
                 }
             }
+			console.log(JSON.stringify(dataGraph));
 			console.log("will post");
 			dataGraph.labels=lableData;
-			dataGraph[0].data=dataSet;
+			console.log(JSON.stringify(dataGraph));
+			dataGraph.datasets[0].data=dataSet;
 			console.log(JSON.stringify(dataGraph));
 			var ctx = document.getElementById("myChart").getContext("2d");
 			var myBarChart = new Chart(ctx).Bar(dataGraph, options);
