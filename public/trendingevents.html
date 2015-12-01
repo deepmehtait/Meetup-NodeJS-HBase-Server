@@ -228,21 +228,15 @@ body.loading .modal {
     
     
     <script>
-	var map;
-	 /*
-     * MAP 2
-     */
+	
     $body = $("body");
 
 $(document).on({
     ajaxStart: function() { $body.addClass("loading");    },
      ajaxStop: function() { $body.removeClass("loading"); }    
 });
-    
-    
-    $(document).ready(function(e) {
-	  // init map
-	  var options ={
+
+var options ={
     //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
     scaleBeginAtZero : true,
 
@@ -276,50 +270,38 @@ $(document).on({
     //String - A legend template
     legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
-};
-	  var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,0.8)",
-            highlightFill: "rgba(151,187,205,0.75)",
-            highlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-     var ctx = document.getElementById("myChart").getContext("2d");
-var myBarChart = new Chart(ctx).Bar(data, options);
+};    
+    
+    $(document).ready(function(e) {
+	  // init map
+	  
+	  
+  
 
 		//alert("called");
     	//setTimeout(callajax,500);    
     });
 	
 	function callajax() {
-
-    var center = new google.maps.LatLng(38.7000, 9.1833);
-    var map = new google.maps.Map(document.getElementById('map2'), {
-        zoom: 3,
-        center: center,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-    //alert("wiill do ajax");
-    var markers = [];
-	var infoWindow = new google.maps.InfoWindow();
+		var lableData=[];
+		var dataSet=[];
+var dataGraph = {
+    //labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+      //      data: [28, 48, 40, 19, 86, 27, 90]
+        }
+    ]
+};
 //    var marker = {};
     $.ajax({
         type: "GET",
-        url: "http://52.34.81.201:3000/getevents",
+        url: "http://52.34.81.201:3000/getTrendingevents",
         headers: {
             "Accept": "application/json; charset=utf-8",
             "Content-Type": "application/json; charset=utf-8"
@@ -336,33 +318,22 @@ var myBarChart = new Chart(ctx).Bar(data, options);
 			$("#ongoing").text(rowlen);
             if (rowlen > 0) {
                 for (var i = 0; i < rowlen; i++) {
-                    var venuelat = Base64.decode(data.Row[i].Cell[1].$);
-                    var venuelon = Base64.decode(data.Row[i].Cell[2].$);
-                    var venuename = Base64.decode(data.Row[i].Cell[3].$);
-                    var latLng = new google.maps.LatLng(venuelat, venuelon);
-                   var marker = new google.maps.Marker({
-                        position: latLng,
-                        clickable: true,
-						infoWindowContent:'Venue:<b>'+venuename+'</b>'
-                    });
-                   
-                    google.maps.event.addListener(marker, 'click', function() {
-    infoWindow.setContent(this.infoWindowContent);
-    infoWindow.open(map,this);
-  });
-                    markers.push(marker);
-                    //console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
-                    /*map.addMarker({
-        lat: venuelat,
-        lng: venuelon,
-        title: venuename,
-        infoWindow: {
-          content: 'Venue Name: <b>'+venuename+'</b>'
-        }
-      });*/
+                    var trendcount = Base64.decode(data.Row[i].Cell[0].$);
+                    var eventnameState = Base64.decode(data.Row[i].Cell[1].$)+','+Base64.decode(data.Row[i].Cell[2].$);
+					lableData.push(eventnameState);
+					dataSet.push(trendcount);
 
+                    
+                   
                 }
             }
+			console.log("will post");
+			dataGraph.put("labels",lableData);
+			dataGraph.put("datasets[0].data",dataSet);
+			console.log(JSON.stringify(dataGraph);
+			var ctx = document.getElementById("myChart").getContext("2d");
+			var myBarChart = new Chart(ctx).Bar(dataGraph, options);
+
             console.log("will post");
             var markerCluster = new MarkerClusterer(map, markers);
 
