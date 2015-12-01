@@ -256,12 +256,16 @@
      async: false,
      crossDomain: true,
      success: function(data) {
-         alert('success'+JSON.stringify(data));
+        // alert('success'+JSON.stringify(data));
 		 console.log(JSON.stringify(data));
 		 var rowlen=data.Row.length;
+		 console.log(rowlen);
 		 if(rowlen>0){
 				for(var i=0;i<rowlen;i++){
-						
+						var venuelat=data.Row[i].Cell[1].$;
+						var venuelon=data.Row[i].Cell[2].$;
+						var venuename=data.Row[i].Cell[3].$;
+						console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);		
 					}	 
 			 }
 		 
