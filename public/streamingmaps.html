@@ -229,10 +229,15 @@
 						var latLng = new google.maps.LatLng(venuelat,venuelon);
 						var marker = new google.maps.Marker({
             position: latLng,
-			infoWindow: {
-          content: 'Venue Name: <b>'+venuename+'</b>'
-        }
+			clickable: true,
+		
           });
+		  marker.info = new google.maps.InfoWindow({
+  content: 'Venue: <b>'+venuename+'</b> ' 
+});
+google.maps.event.addListener(marker, 'click', function() {
+  marker.info.open(map, marker);
+});
           markers.push(marker);
 						//console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
 						 /*map.addMarker({
