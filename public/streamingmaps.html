@@ -172,6 +172,8 @@
       <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script type="text/javascript" src="assets/gmaps/gmaps.min.js"></script>
     <script type="text/javascript" src="js/base64.js"></script>
+    <script type="text/javascript" src="js/makrercluser.js"></script>
+    
     
     <script>
 	var map;
@@ -183,7 +185,12 @@
     
     $(document).ready(function(e) {
 	  // init map
-      
+      map = new GMaps({
+          div: '#map2',
+          lat: 38.7000,
+          lng: 9.1833,
+          zoom: 2
+      });
 
 		//alert("called");
     	setTimeout(callajax,2000);    
@@ -235,6 +242,7 @@
          alert(err);
      }
  });	
+ var mc = new MarkerClusterer(map);
 		
 		}
     
