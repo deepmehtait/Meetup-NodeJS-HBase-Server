@@ -262,10 +262,19 @@
 		 console.log(rowlen);
 		 if(rowlen>0){
 				for(var i=0;i<rowlen;i++){
-						var venuelat=data.Row[i].Cell[1].$;
-						var venuelon=data.Row[i].Cell[2].$;
-						var venuename=data.Row[i].Cell[3].$;
-						console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);		
+						var venuelat=Base64.decode(data.Row[i].Cell[1].$);
+						var venuelon=Base64.decode(data.Row[i].Cell[2].$);
+						var venuename=Base64.decode(data.Row[i].Cell[3].$);
+						console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
+						 map.addMarker({
+        lat: venuelat,
+        lng: venuelon,
+        title: venuename,
+        infoWindow: {
+          content: 'Venue Name: <b>'+venuename+'</b>'
+        }
+      });
+							
 					}	 
 			 }
 		 
