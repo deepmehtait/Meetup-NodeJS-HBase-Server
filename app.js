@@ -16,7 +16,7 @@ app.get('/getevents', function (req, res) {
 			console.log('error');
 			res.json('{"message":"error"}');
 		}
-		console.log("data->"+util.inspect(data,false,null));
+		//console.log("data->"+util.inspect(data,false,null));
 		res.json(data);
 
 	})
