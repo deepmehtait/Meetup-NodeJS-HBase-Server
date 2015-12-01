@@ -204,6 +204,7 @@
           zoom: 2
       });
 		//alert("wiill do ajax");
+		var markers = [];
 	 $.ajax({
      type: "GET",
      url: "http://52.34.81.201:3000/getevents",
@@ -224,25 +225,31 @@
 						var venuelat=Base64.decode(data.Row[i].Cell[1].$);
 						var venuelon=Base64.decode(data.Row[i].Cell[2].$);
 						var venuename=Base64.decode(data.Row[i].Cell[3].$);
+						var latLng = new google.maps.LatLng(venuelat,venuelon);
+						var marker = new google.maps.Marker({
+            position: latLng
+          });
+          markers.push(marker);
 						//console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
-						 map.addMarker({
+						 /*map.addMarker({
         lat: venuelat,
         lng: venuelon,
         title: venuename,
         infoWindow: {
           content: 'Venue Name: <b>'+venuename+'</b>'
         }
-      });
+      });*/
 							
 					}	 
 			 }
+			 var markerCluster = new MarkerClusterer(map, markers);
 		 
      },
      error: function(response, text, err) {
          alert(err);
      }
  });	
- var mc = new MarkerClusterer(map);
+ 
 		
 		}
     
