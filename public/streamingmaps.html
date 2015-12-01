@@ -258,6 +258,13 @@
      success: function(data) {
          alert('success'+JSON.stringify(data));
 		 console.log(JSON.stringify(data));
+		 var rowlen=data.Row.length;
+		 if(rowlen>0){
+				for(var i=0;i<rowlen;i++){
+						
+					}	 
+			 }
+		 
      },
      error: function(response, text, err) {
          alert(err);
