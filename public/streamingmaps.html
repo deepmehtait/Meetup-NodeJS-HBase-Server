@@ -174,71 +174,22 @@
     <script type="text/javascript" src="js/base64.js"></script>
     
     <script>
+	var map;
 	 /*
      * MAP 2
      */
-    (function($) {
-      "use strict";
     
-      // init map
-      var map = new GMaps({
+    
+    
+    $(document).ready(function(e) {
+	  // init map
+      map = new GMaps({
           div: '#map2',
           lat: 38.7000,
           lng: 9.1833,
           zoom: 2
       });
 
-      map.addMarker({
-        lat: 47.495163,
-        lng: 19.035105,
-        title: 'gusto',
-        infoWindow: {
-          content: '<b>New York</b> is a state in the Northeastern and Mid-Atlantic regions of the <i>United States</i>.'
-        }
-      });
-
-      // add New York marker
-      map.addMarker({
-        lat: 40.706086,
-        lng: -73.996864,
-        title: 'New York',
-        infoWindow: {
-          content: '<b>New York</b> is a state in the Northeastern and Mid-Atlantic regions of the <i>United States</i>.'
-        }
-      });
-    
-      // add Chicago marker
-      map.addMarker({
-        lat: 41.8337329,
-        lng: -87.7321554,
-        title: 'Chicago',
-        infoWindow: {
-          content: '<b>Chicago</b> is the third most populous city in the <i>United States</i>, after <i>New York City</i> and <i>Los Angeles</i>.'
-        }
-      });
-    
-      // add Miami marker
-      map.addMarker({
-        lat: 25.782324,
-        lng: -80.2310801,
-        title: 'Miami',
-        infoWindow: {
-          content: '<b>Miami</b> is a city located on the Atlantic coast in southeastern <i>Florida</i> and the county seat of Miami-Dade County.'
-        }
-      });
-    
-      // add Dallas marker
-      map.addMarker({
-        lat: 32.8206645,
-        lng: -96.7313396,
-        title: 'Dallas',
-        infoWindow: {
-          content: '<b>Dallas</b> is a major city in Texas and is the largest urban center of the fourth most populous metropolitan area in the <i>United States</i>.'
-        }
-      });
-    
-    }(jQuery));
-    $(document).ready(function(e) {
 		//alert("called");
     	setTimeout(callajax,2000);    
     });
