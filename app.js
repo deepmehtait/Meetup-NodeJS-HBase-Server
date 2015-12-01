@@ -44,7 +44,7 @@ app.get('/getTrendingevents', function (req, res) {
 
 
 app.get('/getStateevents', function (req, res) {
-	console.log("get Trending events");
+	console.log("get state events");
 	var client = hbase({
 		host: 'localhost',
 		port: 28080
