@@ -5,7 +5,7 @@ var util = require('util');
 app.use('/', express.static(__dirname+'/public'));
 
 app.get('/getevents', function (req, res) {
-	consile.log("get events");
+	console.log("get events");
 	var client = hbase({
 		host: 'localhost',
 		port: 28080
