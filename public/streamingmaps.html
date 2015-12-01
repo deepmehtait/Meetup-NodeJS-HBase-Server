@@ -197,12 +197,13 @@
     });
 	
 	function callajax(){
-		map = new GMaps({
-          div: '#map2',
-          lat: 38.7000,
-          lng: 9.1833,
-          zoom: 2
-      });
+		
+	  var center = new google.maps.LatLng(37.4419, -122.1419);
+        var map = new google.maps.Map(document.getElementById('map2'), {
+          zoom: 3,
+          center: center,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
 		//alert("wiill do ajax");
 		var markers = [];
 	 $.ajax({
@@ -242,6 +243,7 @@
 							
 					}	 
 			 }
+			 console.log("will post");
 			 var markerCluster = new MarkerClusterer(map, markers);
 		 
      },
