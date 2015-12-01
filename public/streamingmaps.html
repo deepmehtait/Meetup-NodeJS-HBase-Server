@@ -183,18 +183,19 @@
     
     $(document).ready(function(e) {
 	  // init map
-      map = new GMaps({
-          div: '#map2',
-          lat: 38.7000,
-          lng: 9.1833,
-          zoom: 2
-      });
+      
 
 		//alert("called");
     	setTimeout(callajax,2000);    
     });
 	
 	function callajax(){
+		map = new GMaps({
+          div: '#map2',
+          lat: 38.7000,
+          lng: 9.1833,
+          zoom: 2
+      });
 		alert("wiill do ajax");
 	 $.ajax({
      type: "GET",
