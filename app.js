@@ -72,7 +72,7 @@ app.get('/getnegative/:eventname', function (req, res) {
 		port: 28080
 	});
 	var conection = new hbase.Connection(client);
-	conection.get('https://localhost:28080/ec_ng/'+req.params.eventname+'*',function(error,data,response){
+	conection.get('https://localhost:28080/ec_ng/Vegfest Glasgow',function(error,data,response){
 		if(error){
 			console.log('error');
 			res.json('{"message":"error"}');
