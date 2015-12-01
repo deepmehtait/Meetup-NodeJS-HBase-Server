@@ -206,6 +206,7 @@
         });
 		//alert("wiill do ajax");
 		var markers = [];
+		var marker=[];
 	 $.ajax({
      type: "GET",
      url: "http://52.34.81.201:3000/getevents",
@@ -227,18 +228,18 @@
 						var venuelon=Base64.decode(data.Row[i].Cell[2].$);
 						var venuename=Base64.decode(data.Row[i].Cell[3].$);
 						var latLng = new google.maps.LatLng(venuelat,venuelon);
-						var marker = new google.maps.Marker({
+						var marker[i] = new google.maps.Marker({
             position: latLng,
 			clickable: true,
 		
           });
-		  marker.info = new google.maps.InfoWindow({
+		  marker[i].info = new google.maps.InfoWindow({
   content: 'Venue: <b>'+venuename+'</b> ' 
 });
 google.maps.event.addListener(marker, 'click', function() {
-  marker.info.open(map, marker);
+  marker.info.open(map, marker[i]);
 });
-          markers.push(marker);
+          markers.push(marker[i]);
 						//console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
 						 /*map.addMarker({
         lat: venuelat,
