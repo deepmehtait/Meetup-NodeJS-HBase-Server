@@ -139,7 +139,7 @@
  
   
 
-<div class="modal"><!-- Place at bottom of page --></div>
+
 <style>
 /* Start by setting display:none to make this hidden.
    Then we position it in relation to the viewport window
@@ -244,6 +244,7 @@ $(document).on({
     });
     //alert("wiill do ajax");
     var markers = [];
+	var infoWindow = new google.maps.InfoWindow();
 //    var marker = {};
     $.ajax({
         type: "GET",
@@ -303,5 +304,6 @@ $(document).on({
 }  
     
     </script>
+    <div class="modal"><!-- Place at bottom of page --></div>
 </body>
 </html>
