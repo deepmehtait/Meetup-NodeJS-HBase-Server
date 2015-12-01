@@ -66,14 +66,15 @@ app.get('/getStateevents', function (req, res) {
 app.get('/getnegative/:eventname', function (req, res) {
 	//req.param()
 	console.log(req.params.eventname);
-	var eventnamesplit=
+	var eventnamesplit=req.params.eventname;
+
 	console.log("get state events");
 	var client = hbase({
 		host: 'localhost',
 		port: 28080
 	});
 	var conection = new hbase.Connection(client);
-	conection.get('https://localhost:28080/ec_ng/'+req.params.eventname+'*',function(error,data,response){
+	conection.get('https://localhost:28080/ec_ng/'+encodeURIComponent(req.params.eventname)+'*',function(error,data,response){
 		if(error){
 			console.log('error');
 			res.json('{"message":"error"}');
