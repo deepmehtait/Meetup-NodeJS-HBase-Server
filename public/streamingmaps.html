@@ -198,7 +198,7 @@
 	
 	function callajax(){
 		
-	  var center = new google.maps.LatLng(37.4419, -122.1419);
+	  var center = new google.maps.LatLng(38.7000, 9.1833);
         var map = new google.maps.Map(document.getElementById('map2'), {
           zoom: 3,
           center: center,
@@ -228,7 +228,10 @@
 						var venuename=Base64.decode(data.Row[i].Cell[3].$);
 						var latLng = new google.maps.LatLng(venuelat,venuelon);
 						var marker = new google.maps.Marker({
-            position: latLng
+            position: latLng,
+			infoWindow: {
+          content: 'Venue Name: <b>'+venuename+'</b>'
+        }
           });
           markers.push(marker);
 						//console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
