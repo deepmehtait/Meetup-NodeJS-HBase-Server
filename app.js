@@ -65,6 +65,7 @@ app.get('/getStateevents', function (req, res) {
 
 app.get('/getnegative/:eventname', function (req, res) {
 	//req.param()
+	console.log(req.params.eventname);
 	console.log("get state events");
 	var client = hbase({
 		host: 'localhost',
