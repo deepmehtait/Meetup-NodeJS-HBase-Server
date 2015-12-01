@@ -236,7 +236,7 @@
 		  marker[i].info = new google.maps.InfoWindow({
   content: 'Venue: <b>'+venuename+'</b> ' 
 });
-google.maps.event.addListener(marker, 'click', function() {
+google.maps.event.addListener(marker[i], 'click', function() {
   marker.info.open(map, marker[i]);
 });
           markers.push(marker[i]);
