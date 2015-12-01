@@ -11,7 +11,7 @@ app.get('/getevents', function (req, res) {
 		port: 28080
 	});
 	var conection = new hbase.Connection(client);
-	connection.get('https://localhost:28080/rsvp/1540204908/',function(error,data,response){
+	conection.get('https://localhost:28080/rsvp/1540204908/',function(error,data,response){
 		if(error){
 			console.log('error');
 			res.json('{"message":"error"}');
