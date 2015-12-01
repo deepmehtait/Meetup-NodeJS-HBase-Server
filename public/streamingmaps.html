@@ -209,7 +209,7 @@
      crossDomain: true,
      success: function(data) {
         // alert('success'+JSON.stringify(data));
-		 console.log(JSON.stringify(data));
+		// console.log(JSON.stringify(data));
 		 var rowlen=data.Row.length;
 		 console.log(rowlen);
 		 if(rowlen>0){
@@ -217,7 +217,7 @@
 						var venuelat=Base64.decode(data.Row[i].Cell[1].$);
 						var venuelon=Base64.decode(data.Row[i].Cell[2].$);
 						var venuename=Base64.decode(data.Row[i].Cell[3].$);
-						console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
+						//console.log("lat- "+venuelat+" lon-"+venuelon+" name-"+venuename);	
 						 map.addMarker({
         lat: venuelat,
         lng: venuelon,
