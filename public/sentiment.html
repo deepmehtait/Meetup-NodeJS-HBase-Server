@@ -143,7 +143,7 @@
     
     <div class="col s12 l12">
     <div class="card-panel"> 
-    <form id="formname" onsubmit="return false;">
+    <form id="formname" name="formname" onsubmit="return false;">
     <div class="row" class="col l6">
     <!-- Business Name -->
             <div class="input-field col l6">
@@ -250,7 +250,43 @@ body.loading .modal {
 	function  getRec(){
 		var eventname=$('#input-name').val();
 		alert(eventname);
-		
+		 $.ajax({
+        type: "GET",
+        url: "http://52.34.81.201:3000/getnegative/"+eventname,
+        headers: {
+            "Accept": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        dataType: 'json',
+        data: "",
+        async: false,
+        crossDomain: true,
+        success: function(data) {
+            alert('success'+JSON.stringify(data));
+            console.log(JSON.stringify(data));
+            var rowlen = data.Row.length;
+            console.log(rowlen);
+			$("#ongoing").text(rowlen);
+            if (rowlen > 0) {
+                for (var i = 0; i < rowlen; i++) {
+                    var trendcount = Base64.decode(data.Row[i].Cell[0].$);
+                    var eventnameState = Base64.decode(data.Row[i].Cell[1].$);
+					//lableData.push(eventnameState);
+					//dataSet.push(trendcount);
+
+                    
+                   
+                }
+            }
+			//console.log(JSON.stringify(dataGraph));
+//			
+            console.log("will post");
+           
+        },
+        error: function(response, text, err) {
+            alert(err);
+        }
+    });
 		
 		}
 	(function() {
