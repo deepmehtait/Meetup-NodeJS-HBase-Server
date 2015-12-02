@@ -272,7 +272,7 @@ body.loading .modal {
                 for (var i = 0; i < rowlen; i++) {
 					var negativecenti=Base64.decode(data.Row[i].Cell[0].$);
 					var dataobj={"data":negativecenti,"color":"#90a4ae","label":"negative"}
-					dataSet.put(dataobj);
+					dataSet.push(dataobj);
                     //var trendcount = Base64.decode(data.Row[i].Cell[0].$);
                     //var eventnameState = Base64.decode(data.Row[i].Cell[1].$);
 					//lableData.push(eventnameState);
