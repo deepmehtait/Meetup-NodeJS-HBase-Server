@@ -264,8 +264,8 @@ body.loading .modal {
         async: false,
         crossDomain: true,
         success: function(data) {
-            alert('success'+JSON.stringify(data));
-            console.log(JSON.stringify(data));
+           // alert('success'+JSON.stringify(data));
+            //console.log(JSON.stringify(data));
             var rowlen = data.Row.length;
             console.log(rowlen);
 			$("#ongoing").text(rowlen);
@@ -279,7 +279,7 @@ body.loading .modal {
             }
 			//console.log(JSON.stringify(dataGraph));
 //			
-            console.log("will post+"+dataSet);
+           // console.log("will post+"+dataSet);
            
         },
         error: function(response, text, err) {
@@ -299,10 +299,10 @@ body.loading .modal {
         async: false,
         crossDomain: true,
         success: function(data) {
-            alert('success'+JSON.stringify(data));
-            console.log(JSON.stringify(data));
+            //alert('success'+JSON.stringify(data));
+           // console.log(JSON.stringify(data));
             var rowlen = data.Row.length;
-            console.log(rowlen);
+            //console.log(rowlen);
 			$("#ongoing").text(rowlen);
             if (rowlen > 0) {
                 for (var i = 0; i < rowlen; i++) {
@@ -314,7 +314,7 @@ body.loading .modal {
             }
 			//console.log(JSON.stringify(dataGraph));
 //			
-            console.log("will post+"+dataSet);
+           // console.log("will post+"+dataSet);
            
         },
         error: function(response, text, err) {
@@ -335,10 +335,10 @@ body.loading .modal {
         async: false,
         crossDomain: true,
         success: function(data) {
-            alert('success'+JSON.stringify(data));
-            console.log(JSON.stringify(data));
+            //alert('success'+JSON.stringify(data));
+            //console.log(JSON.stringify(data));
             var rowlen = data.Row.length;
-            console.log(rowlen);
+            //console.log(rowlen);
 			$("#ongoing").text(rowlen);
             if (rowlen > 0) {
                 for (var i = 0; i < rowlen; i++) {
