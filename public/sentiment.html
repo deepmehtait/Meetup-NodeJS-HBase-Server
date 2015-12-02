@@ -248,6 +248,7 @@ body.loading .modal {
     
     <script>
 	function  getRec(){
+		var dataSet=[];
 		var eventname=$('#input-name').val();
 		alert(eventname);
 		 $.ajax({
@@ -269,6 +270,9 @@ body.loading .modal {
 			$("#ongoing").text(rowlen);
             if (rowlen > 0) {
                 for (var i = 0; i < rowlen; i++) {
+					var negativecenti=Base64.decode(data.Row[i].Cell[0].$);
+					var dataobj={"data":negativecenti,"color":"#90a4ae","label":"negative"}
+					dataSet.put(dataobj);
                     //var trendcount = Base64.decode(data.Row[i].Cell[0].$);
                     //var eventnameState = Base64.decode(data.Row[i].Cell[1].$);
 					//lableData.push(eventnameState);
@@ -280,7 +284,7 @@ body.loading .modal {
             }
 			//console.log(JSON.stringify(dataGraph));
 //			
-            console.log("will post");
+            console.log("will post+"+dataSet);
            
         },
         error: function(response, text, err) {
