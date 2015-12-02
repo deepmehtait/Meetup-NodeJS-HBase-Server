@@ -86,6 +86,54 @@ app.get('/getnegative/:eventname', function (req, res) {
   //res.json('Hello World!');
 });
 
+//postive
+app.get('/getpositive/:eventname', function (req, res) {
+	//req.param()
+	console.log(req.params.eventname);
+	var eventnamesplit=req.params.eventname;
+
+	console.log("get state events");
+	var client = hbase({
+		host: 'localhost',
+		port: 28080
+	});
+	var conection = new hbase.Connection(client);
+	conection.get('https://localhost:28080/ec_ps/'+encodeURIComponent(req.params.eventname)+'*',function(error,data,response){
+		if(error){
+			console.log('error');
+			res.json('{"message":"error"}');
+		}
+		//console.log("data->"+util.inspect(data,false,null));
+		res.json(data);
+
+	})
+  //res.json('Hello World!');
+});
+
+//postive
+app.get('/getneutral/:eventname', function (req, res) {
+	//req.param()
+	console.log(req.params.eventname);
+	var eventnamesplit=req.params.eventname;
+
+	console.log("get state events");
+	var client = hbase({
+		host: 'localhost',
+		port: 28080
+	});
+	var conection = new hbase.Connection(client);
+	conection.get('https://localhost:28080/ec_nr/'+encodeURIComponent(req.params.eventname)+'*',function(error,data,response){
+		if(error){
+			console.log('error');
+			res.json('{"message":"error"}');
+		}
+		//console.log("data->"+util.inspect(data,false,null));
+		res.json(data);
+
+	})
+  //res.json('Hello World!');
+});
+
 
 
 
